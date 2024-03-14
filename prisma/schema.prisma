@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Problem {
+  id        Int         @id @default(autoincrement())
+  title     String
+  Complaint Complaint[]
+
+  @@map("problems")
+}
+
+model User {
+  id                       String      @id @default(uuid())
+  name                     String
+  email                    String      @unique
+  profile_picture          Bytes?
+  password_hash            String
+  is_notifications_on      Boolean     @default(false)
+  is_terms_of_use_accepted Boolean     @default(false)
+  Complaint                Complaint[]
+
+  @@map("users")
+}
+
+model Complaint {
+  id          String  @id @default(uuid())
+  address     String
+  description String?
+
+  user           User             @relation(fields: [user_id], references: [id])
+  user_id        String
+  problem        Problem          @relation(fields: [problem_id], references: [id])
+  problem_id     Int
+  
+  ComplaintPhoto ComplaintPhoto[]
+
+  @@map("complaints")
+}
+
+model ComplaintPhoto {
+  id String @default(uuid())
+
+  complaint Complaint @relation(fields: [complaint_id], references: [id])
+  complaint_id String
+
+  photo       Bytes
+
+  @@id([id, complaint_id])
+  @@map("complaints_photos")
+}
