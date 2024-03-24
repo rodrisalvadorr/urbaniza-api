@@ -22,40 +22,40 @@ model Problem {
 }
 
 model User {
-  id                       String      @id @default(uuid())
-  name                     String
-  email                    String      @unique
-  profile_picture          Bytes?
-  password_hash            String
-  is_notifications_on      Boolean     @default(false)
-  is_terms_of_use_accepted Boolean     @default(false)
-  Complaint                Complaint[]
+  id                         String      @id @default(uuid())
+  name                       String
+  email                      String      @unique
+  email_validated_at         DateTime?
+  profile_picture            Bytes?
+  changed_profile_picture_at DateTime?
+  password_hash              String
+  changed_password_at        DateTime
+  is_notifications_on        Boolean     @default(false)
+  is_terms_of_use_accepted   Boolean     @default(false)
+  validation_code            String?     
+  Complaint                  Complaint[]
 
   @@map("users")
 }
 
 model Complaint {
-  id          String  @id @default(uuid())
-  address     String
-  description String?
-
+  id             String           @id @default(uuid())
+  address        String
+  description    String?
   user           User             @relation(fields: [user_id], references: [id])
   user_id        String
   problem        Problem          @relation(fields: [problem_id], references: [id])
   problem_id     Int
-  
   ComplaintPhoto ComplaintPhoto[]
 
   @@map("complaints")
 }
 
 model ComplaintPhoto {
-  id String @default(uuid())
-
-  complaint Complaint @relation(fields: [complaint_id], references: [id])
+  id           String    @default(uuid())
+  complaint    Complaint @relation(fields: [complaint_id], references: [id])
   complaint_id String
-
-  photo       Bytes
+  photo        Bytes
 
   @@id([id, complaint_id])
   @@map("complaints_photos")
