@@ -5,7 +5,7 @@ Urbaniza
 ## Functional requirements
 
 - [x] User can register providing name, email and password;
-- [] User can authenticate providing their email and password;
+- [x] User can authenticate providing their email and password;
 - [] User must accept the terms of use, in accordance with LGPD, in order to authenticate in the app;
 - [] User must confirm their email before authenticating;
 - [] Authenticated user can see their own profile containing their information excepting the password;
