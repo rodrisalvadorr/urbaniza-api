@@ -32,7 +32,7 @@ model User {
   changed_password_at        DateTime
   is_notifications_on        Boolean     @default(false)
   is_terms_of_use_accepted   Boolean     @default(false)
-  validation_code            String?     
+  validation_code            String?      @default(uuid())
   Complaint                  Complaint[]
 
   @@map("users")

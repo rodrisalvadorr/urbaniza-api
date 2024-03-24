@@ -4,6 +4,16 @@ import { UsersRepository } from '../users-repository'
 export class InMemoryUserRepository implements UsersRepository {
   public items: User[] = []
 
+  async findById(id: string) {
+    const user = this.items.find((item) => item.id === id)
+
+    if (!user) {
+      return null
+    }
+
+    return user
+  }
+
   async findByEmail(email: string) {
     const user = this.items.find((item) => item.email === email)
 
@@ -26,11 +36,23 @@ export class InMemoryUserRepository implements UsersRepository {
       changed_password_at: new Date(),
       is_notifications_on: false,
       is_terms_of_use_accepted: false,
-      validation_code: null,
+      validation_code: 'validation string',
     }
 
     this.items.push(user)
 
     return user
+  }
+
+  async update(data: User) {
+    const userIndex = this.items.findIndex((item) => item.id === data.id)
+
+    const deletedContent = this.items.splice(userIndex, 1, data)
+
+    if (deletedContent.length === 0) {
+      return false
+    }
+
+    return true
   }
 }
