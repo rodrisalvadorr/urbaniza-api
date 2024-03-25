@@ -55,4 +55,14 @@ describe('Register Use Case', () => {
       }),
     ).rejects.toBeInstanceOf(UserAlreadyExistsError)
   })
+
+  it.todo('should send a validation code to the user email', async () => {
+    await expect(() =>
+      sut.execute({
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        password: '12345678',
+      }),
+    ).rejects.toBeInstanceOf(Error)
+  })
 })
