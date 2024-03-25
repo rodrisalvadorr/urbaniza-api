@@ -57,6 +57,7 @@ describe('Register Use Case', () => {
   })
 
   it.todo('should send a validation code to the user email', async () => {
+    // Validate whether the sent message matches the actual message
     await expect(() =>
       sut.execute({
         name: 'John Doe',
