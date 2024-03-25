@@ -3,7 +3,7 @@ import { describe, expect, it, beforeEach } from 'vitest'
 import { hash } from 'bcryptjs'
 import { ConfirmEmailUseCase } from './confirm-email'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
-import { ResourceAlreadyValidated } from './errors/resource-already-validated-error'
+import { ResourceAlreadyValidatedError } from './errors/resource-already-validated-error'
 
 let usersRepository: InMemoryUserRepository
 let sut: ConfirmEmailUseCase
@@ -64,7 +64,7 @@ describe('Confirm Email Use Case', () => {
         userId: user.id,
         code: user.validation_code,
       })
-    }).rejects.toBeInstanceOf(ResourceAlreadyValidated)
+    }).rejects.toBeInstanceOf(ResourceAlreadyValidatedError)
   })
 
   it('should not be able to confirm email with wrong code', async () => {

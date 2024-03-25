@@ -1,6 +1,6 @@
 import { UsersRepository } from '@/repositories/users-repository'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
-import { ResourceAlreadyValidated } from './errors/resource-already-validated-error'
+import { ResourceAlreadyValidatedError } from './errors/resource-already-validated-error'
 
 interface ConfirmEmailUseCaseRequest {
   userId: string
@@ -25,7 +25,7 @@ export class ConfirmEmailUseCase {
     }
 
     if (user.email_validated_at) {
-      throw new ResourceAlreadyValidated()
+      throw new ResourceAlreadyValidatedError()
     }
 
     if (code !== user.validation_code) {

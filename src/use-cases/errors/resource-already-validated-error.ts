@@ -1,4 +1,4 @@
-export class ResourceAlreadyValidated extends Error {
+export class ResourceAlreadyValidatedError extends Error {
   constructor() {
     super('Resource already validated.')
   }
