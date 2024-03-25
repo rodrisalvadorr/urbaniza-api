@@ -3,6 +3,7 @@ import { describe, expect, it, beforeEach } from 'vitest'
 import { AuthenticateUseCase } from './authenticate'
 import { hash } from 'bcryptjs'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
+import { User } from '@prisma/client'
 
 let usersRepository: InMemoryUserRepository
 let sut: AuthenticateUseCase
@@ -14,12 +15,16 @@ describe('Authenticate Use Case', () => {
   })
 
   it('should be able to authenticate', async () => {
-    await usersRepository.create({
+    const createdUser: User = await usersRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
       password_hash: await hash('12345678', 6),
       changed_password_at: new Date(),
     })
+
+    createdUser.email_validated_at = new Date()
+
+    await usersRepository.update(createdUser)
 
     const { user } = await sut.execute({
       email: 'johndoe@example.com',
