@@ -31,6 +31,10 @@ export class AuthenticateUseCase {
       throw new InvalidCredentialsError()
     }
 
+    if (user.email_validated_at === null) {
+      throw new InvalidCredentialsError()
+    }
+
     return {
       user,
     }
