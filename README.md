@@ -2,25 +2,36 @@
 
 Urbaniza
 
-## Functional requirements
+## Requisitos Funcionais
 
-- [x] User can register providing name, email and password;
-- [x] User can authenticate providing their email and password;
-- [] User must accept the terms of use, in accordance with LGPD, in order to authenticate in the app;
-- [x] User must confirm their email before authenticating;
-- [x] Authenticated user can see their own profile containing their information;
-- [] Authenticated user can change their profile picture;
-- [] Authenticated user can change their password;
-- [] Authenticated user can change their notifications status;
+- [x] O Usuário poderá se cadastrar fornecendo nome, email e senha;
+- [x] O Usuário poderá se autenticar fornecendo seu email e senha de cadastro;
+- [] O Usuário deverá aceitar os termos de uso do aplicativo, conforme a LGPD, para se autenticar;
+- [x] O Usuário deverá confirmar seu email para se autenticar;
+- [x] O Usuário autenticado poderá visualizar seu perfil com todas suas informações;
+- [] O Usuário autenticado poderá alterar sua foto de perfil;
+- [] O Usuário autenticado poderá alterar sua senha;
+- [] O Usuário autenticado poderá alterar o status das notificações;
+- [] O Usuário autenticado poderá ver seu histórico de ocorrências;
+- [] O Usuário autenticado poderá criar uma nova ocorrência fornecendo endereço, categoria e, de forma opcional, foto e descrição;
+- [] O Sistema deverá criar um pin que conterá as informações de latitude e longitude da ocorrência e visibilidade no mapa;
+- [] Somente o Usuário autenticado que criou a ocorrência poderá alterar foto e descrição fornecidos;
+- [] O Usuário poderá adicionar foto e descrição adicional à ocorrências de outro usuário;
+- [] O Usuário autenticado poderá consultar detalhes de uma ocorrência ao clicar em um pin no mapa;
+- [] O Usuário autenticado poderá filtrar a categoria dos problemas das ocorrências no mapa;
+- [] Somente o Admistrador poderá alterar o status de uma ocorrência;
+- [] O Sistema não deverá permitir a exclusão de ocorrências;
+- [] O Sistema não deverá permitir a alteração de informações da ocorrência após esta ter sido finalizada;
+- [] O Sistema deverá tornar o pin invísivel no mapa, caso a ocorrência correspondente a ele tenha sido encerrada;
 
-## Business rules
+## Regras de Negócio
 
-- [x] User cannot register with duplicate email;
-- [] Authenticated user cannot change their profile picture twice a day;
-- [] Authenticated user cannot change their password twice a day;
-- [] Authenticated user can only change their password after confirming by email;
+- [x] O Usuário não poderá se cadastrar com email duplicado;
+- [] O Usuário autenticado não poderá mudar sua foto de perfil duas vezes por dia;
+- [] O Usuário autenticado não poderá mudar sua senha duas vezes por dia;
+- [] O Usuário autenticado só poderá mudar sua senha após confirmar por email;
 
-## Non-functional requirements
+## Requisitos Não Funcionais
 
-- [x] User's password must be encrypted;
-- [] Data must be persisted in an SQL database;
+- [x] A senha do usuário deverá ser criptografada;
+- [] Os dados da aplicação deverão ser persistidos em um banco de dados SQL;
