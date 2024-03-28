@@ -3,6 +3,7 @@ import { describe, expect, it, beforeEach } from 'vitest'
 import { RegisterUseCase } from './register'
 import { compare } from 'bcryptjs'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
+import { InvalidCredentialsError } from './errors/invalid-credentials-error'
 
 let usersRepository: InMemoryUserRepository
 let sut: RegisterUseCase
@@ -16,7 +17,7 @@ describe('Register Use Case', () => {
   it('should be able to register', async () => {
     const { user } = await sut.execute({
       name: 'John Doe',
-      email: 'johndoe@example.com',
+      email: 'rodrigoagamer@gmail.com',
       password: '12345678',
     })
 
@@ -26,7 +27,7 @@ describe('Register Use Case', () => {
   it('should hash the user password upon registration', async () => {
     const { user } = await sut.execute({
       name: 'John Doe',
-      email: 'johndoe@example.com',
+      email: 'rodrigoagamer@gmail.com',
       password: '12345678',
     })
 
@@ -39,7 +40,7 @@ describe('Register Use Case', () => {
   })
 
   it('should not be able to register with the same email twice', async () => {
-    const email = 'johndoe@example.com'
+    const email = 'rodrigoagamer@gmail.com'
 
     await sut.execute({
       name: 'John Doe',
@@ -56,14 +57,23 @@ describe('Register Use Case', () => {
     ).rejects.toBeInstanceOf(UserAlreadyExistsError)
   })
 
-  it.todo('should send a validation code to the user email', async () => {
-    // Validate whether the sent message matches the actual message
+  it('should send a validation code to the user email', async () => {
+    const { wasEmailSent } = await sut.execute({
+      name: 'John Doe',
+      email: 'rodrigoagamer@gmail.com',
+      password: '12345678',
+    })
+
+    expect(wasEmailSent).toBe(true)
+  })
+
+  it('should not be able to register with an invalid email', async () => {
     await expect(() =>
       sut.execute({
         name: 'John Doe',
         email: 'johndoe@example.com',
         password: '12345678',
       }),
-    ).rejects.toBeInstanceOf(Error)
+    ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 })

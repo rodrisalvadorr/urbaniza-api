@@ -5,6 +5,7 @@ Urbaniza
 ## Requisitos Funcionais
 
 - [x] O Usuário poderá se cadastrar fornecendo nome, email e senha;
+- [] O Sistema deverá enviar um código de validação da conta para o email do usuário no momento do cadastro para validação do conta.
 - [x] O Usuário poderá se autenticar fornecendo seu email e senha de cadastro;
 - [] O Usuário deverá aceitar os termos de uso do aplicativo, conforme a LGPD, para se autenticar;
 - [x] O Usuário deverá confirmar seu email para se autenticar;
